@@ -7,5 +7,5 @@ It's just intended for demonstration purposes, and has some of my solutions to t
 Example including a template from the bundle:
 
 ```twig
-{% include 'vendor/nystudio107/test-bundle/templates/fizz-buzz.twig' %}
+{% include 'vendor/nystudio107/test-twig-bundle/templates/fizz-buzz.twig' %}
 ```

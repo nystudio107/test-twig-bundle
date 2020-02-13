@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "keywords": [
     "twig",
+    "twig-bundle",
     "composer",
     "installer",
     "bundle"

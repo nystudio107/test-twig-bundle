@@ -1,0 +1,43 @@
+{#
+ # Challenge #1 – Putting the Fizz back in your Buzz
+ # https://craftcodingchallenge.com/challenge-1-putting-the-fizz-back-in-your-buzz
+ # @author Andrew Welch, nystudio107
+ #}
+
+{#
+ # Return the value of `className` if `number` is a multiple of any of the values in the `values` array
+ # Otherwise, return an empty string
+ # @param int    number
+ # @param int[]  values
+ # @param string className
+ #}
+{%- macro getClassIfMultiple(number, values, className) -%}
+    {% spaceless %}
+        {% set result = "" %}
+        {# Micro-optimization to not execute the loop if we already have set `result` #}
+        {% for value in values if not result %}
+            {% if number is divisible by(value) %}
+                {% set result = className %}
+            {% endif %}
+        {% endfor %}
+        {{ result }}
+    {% endspaceless %}
+{%- endmacro -%}
+
+{#
+ # Output each of the entry.title's with appropriate classes set depending on
+ # whether the index is a multiple of the numbers in fizz[] and buzz[]
+ # @param Entry[] entries
+ # @param int[]   fizz
+ # @param int[]   buzz
+ #}
+{% macro fizzBuzz(entries, fizz, buzz) %}
+    {# Do the gruntwork via a reusable macro #}
+    {% from _self import getClassIfMultiple %}
+    {# Calculate the classes for each potential entry #}
+    {% for entry in entries %}
+        {% set fizzClass = getClassIfMultiple(loop.index, fizz, "fizz") %}
+        {% set buzzClass = getClassIfMultiple(loop.index, buzz, "buzz") %}
+        <h4 class="{{ fizzClass ~ buzzClass }}">{{ "#{entry.title} #{loop.index}" }}</h4>
+    {% endfor %}
+{% endmacro %}

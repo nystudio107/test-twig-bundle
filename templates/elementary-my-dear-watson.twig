@@ -1,0 +1,35 @@
+{#
+ # Challenge #4 – Elementary, my dear Watson
+ # https://craftcodingchallenge.com/challenge-4-elementary-my-dear-watson
+ # @author Andrew Welch, nystudio107
+ #}
+
+{#
+ # Iterate through the passed in elements, starting at startId, outputting
+ # the id number of the element, and then recursively call the macro until
+ # an element is reach that has no nextElement.
+ # @param int   startId
+ # @param array elements
+ #}
+{%- macro revealSecret(startId, elements) -%}
+    {# Make sure we were passed in a value starting point #}
+    {%- set element = elements[startId] ?? null -%}
+    {%- if element | length -%}
+        {{- "#{startId} > " }}
+        {# If element.nextElement is null, we're done. Output the title and exit #}
+        {%- if element.nextElement == null -%}
+            {{- element.title }}
+        {%- else -%}
+            {# Let twig evaluate the expression for us #}
+            {%- set startId = renderObjectTemplate("{{ #{element.nextElement} }}", {}) -%}
+            {# Call ourselves recursively to continue iterating through the elements #}
+            {%- from _self import revealSecret -%}
+            {{- revealSecret(startId, elements) }}
+        {%- endif -%}
+    {% else %}
+        {{ "Error, startId #{startId} not found in elements" | t }}
+    {% endif %}
+{%- endmacro -%}
+
+{% from _self import revealSecret %}
+{{ revealSecret(3, elements) }}

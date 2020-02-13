@@ -1,0 +1,29 @@
+{#
+ # Challenge #2 – 5 Minute Read
+ # https://craftcodingchallenge.com/challenge-2-5-minute-read
+ # @author Andrew Welch, nystudio107
+ #}
+
+{#
+ # Calculate an estimated reading time in minutes, making some assumptions based
+ # English as the language, average word length, and average words per minute read
+ # @param string text
+ #}
+{% macro readTime(text) %}
+    {#
+     # Assume English, based on the contest parameters/examples
+     # http://www.wolframalpha.com/input/?i=average+english+word+length
+     #}
+    {% set averageWordLength = 5.1 %}
+    {% set wordsReadPerMinute = 200 %}
+    {# Ballpark the number of words in the text; add 1 because spaces/punctuation #}
+    {% set averageNumberOfWords = (text | length) / (averageWordLength + 1) %}
+    {% set readingTimeInMins = round(averageNumberOfWords / wordsReadPerMinute) %}
+    {{ "{0, duration,%with-words}" | t([readingTimeInMins * 60]) }}
+{% endmacro %}
+
+{% from _self import readTime  %}
+{# No reason to do the work on every page load; cache the result #}
+{% cache globally using key craft.app.request.url~"entry.someRichText" %}
+    {{ readTime(entry.someRichText) }}
+{% endcache %}

@@ -1,0 +1,21 @@
+{
+  "name": "nystudio107/test-bundle",
+  "description": "Test bundle of Twig templates for Bundle Installer",
+  "version": "1.0.0",
+  "keywords": [
+    "twig",
+    "composer",
+    "installer",
+    "bundle"
+  ],
+  "homepage": "https://nystudio107.com",
+  "type": "twig-bundle",
+  "support": {
+    "email": "info@nystudio107.com",
+    "issues": "https://github.com/nystudio107/test-bundle/issues",
+    "source": "https://github.com/nystudio107/test-bundle",
+    "docs": "https://github.com/nystudio107/test-bundle"
+  },
+  "license": "MIT",
+  "minimum-stability": "stable"
+}

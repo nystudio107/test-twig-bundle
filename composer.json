@@ -1,7 +1,7 @@
 {
   "name": "nystudio107/test-twig-bundle",
   "description": "Test bundle of Twig templates for Bundle Installer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "twig",
     "twig-bundle",
